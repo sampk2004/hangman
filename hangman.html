@@ -1,0 +1,26 @@
+<html>
+<head>
+  <link rel="stylesheet" type="text/css" href="View/bootstrap/bootstrap.min.css">
+  <link rel="stylesheet" type="text/css" href="View/css/hangman.css">
+  <script src="Models/wordarray.js"></script>
+  <script src="Controller/controller.js"></script>
+  <script src="View/view.js"></script>
+</head>
+<body>
+  <div id="gameContainer">
+    <h1>Hangman Reborn</h1>
+    <h2>Current Score: <span id="score">0</span><h2>
+    <h2>Number of Guesses: <span id="guesses">7</span><h2>
+    <div id="WordContainer">
+      <h1 id="word">
+    </div>
+    <h4 id="quote"></h4>
+    <button id="reset" class="btn btn-info">Restart</button>
+    <div id="controlpanel">
+    </div>
+  </div>
+</body>
+</html>
+<script>
+init();
+</script>
