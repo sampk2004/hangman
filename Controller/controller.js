@@ -29,6 +29,7 @@ function showWord(value){
   updateScoreGuesses(wordFound, occurences);
 }
 
+/* Finds number of correct guesses per game */
 function findPoints(currentWord) {
 
   var foundWords = [currentWord[0]];
@@ -49,7 +50,65 @@ function findPoints(currentWord) {
 
   }
   return counter;
+
 }
-function resetAssign(){
-  document.getElementById("reset").setAttribute("onclick", "init(2)")
+
+function getEmail(){
+     return document.getElementById("inputEmail").value;
+}
+
+function getPassword(){
+     return document.getElementById("inputPassword").value;
+}
+
+function validateAll(){
+
+     var username = document.getElementById("inputUsername").value;
+
+     if (username.length >= 4){
+          return true;
+     } else{
+          let errordiv =  document.getElementById("error");
+              errordiv.style.display="block";
+              errordiv.innerHTML = "Username has to be longer then 4 characters";
+              $("#error").fadeOut(8000);
+          return false;
+     }
+}
+function signout(){
+     firebase.auth().signOut().then(function() {
+       location = "login.html";
+     }, function(error) {
+       console.error('Sign Out Error', error);
+     });
+}
+
+function initRank(word) {
+   for (var x = 0; x < list.length; x++) {
+        insertRank(x + 1, list[x]["username"], list[x]["score"], list[x]["time"], word);
+   }
+}
+
+function push(username, score, time) {
+   let user = {};
+   let length = list.length;
+   user['username'] = username
+   user['score'] = score
+   user['time'] = time
+   if (list.length == 0) {
+        list.push(user);
+   } else {
+        for (var data = 0; data < length; data++) {
+            if (list[data]["score"] < score) {
+               list.splice(data, 0, user);
+               return;
+            }
+            if (list[data]["score"] == score && list[data]["time"] > time) {
+               list.splice(data, 0, user);
+               return;
+            }
+        }
+        list.push(user);
+   }
+
 }
